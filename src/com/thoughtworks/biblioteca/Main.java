@@ -9,7 +9,13 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        new Application(library(), System.out, new BufferedReader(new InputStreamReader(System.in))).start();
+        Menu menu = new Menu(System.out);
+        Library library = library();
+        menu.addOption("1", new ListBookOption(library));
+        BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+        menu.addOption("2", new CheckoutBookOption(library, System.out, in));
+
+        new Application(library(), System.out, in, menu).start();
     }
 
     private static Library library() {

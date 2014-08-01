@@ -7,6 +7,8 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.MatcherAssert.assertThat;
+import static org.hamcrest.core.Is.is;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
@@ -82,6 +84,16 @@ public class LibraryTest {
         for (Book book : books) {
             verify(book).getDetails();
         }
+    }
+
+    @Test
+    public void shouldCheckoutBook(){
+        List<Book> books = new ArrayList<Book>();
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
+        Library myLibrary = new Library(books, fakePrintStream);
+        myLibrary.checkOut("1");
+        assertThat(myLibrary.getBooks().size(), is(1));
     }
 
 }

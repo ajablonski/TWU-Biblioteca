@@ -19,13 +19,15 @@ public class ApplicationTest {
     private Application application;
     private PrintStream fakePrintStream;
     private BufferedReader fakeInputStream;
+    private Menu fakeMenu;
 
     @Before
     public void setUp() throws Exception {
         library = mock(Library.class);
         fakePrintStream = mock(PrintStream.class);
         fakeInputStream = new BufferedReader(new StringReader("1\nQ"));
-        application = new Application(library, fakePrintStream, fakeInputStream);
+        fakeMenu = mock(Menu.class);
+        application = new Application(library, fakePrintStream, fakeInputStream, fakeMenu);
     }
 
     @Test
@@ -46,34 +48,18 @@ public class ApplicationTest {
     }
 
     @Test
-    public void shouldDisplayBooksWhenOption1IsChosen(){
-        application.start();
-        verify(library).displayBooks();
-    }
-
-    @Test
-    public void shouldPrintErrorMessageWhenInvalidOptionIsChosen() {
-        Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("X\n1\nQ")));
-        app.start();
-        verify(fakePrintStream).println("Select a valid option!");
-        verifyMenuDisplayedTimes(3);
-        verify(library).displayBooks();
-    }
-
-    @Test
     public void shouldLoopUntilQuit() {
-        Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("1\n1\nQ")));
+        Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("1\n1\nQ")), fakeMenu);
         app.start();
         verifyMenuDisplayedTimes(3);
-        verify(library, times(2)).displayBooks();
+        verify(fakeMenu, times(2)).choose("1");
     }
 
     @Test
-    public void shouldPromptUserWhenCheckoutSelected() {
-        Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("2\nQ")));
+    public void shouldChooseAppropriateMenuOption() {
+        Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("1\nQ")), fakeMenu);
         app.start();
-        verify(library).displayBooksWithNumbers();
-        verify(fakePrintStream).print("Choose a book: ");
+        verify(fakeMenu).choose("1");
     }
 
     private void verifyMenuDisplayedTimes(int t) {
@@ -82,5 +68,4 @@ public class ApplicationTest {
         verify(fakePrintStream, times(t)).println("Q. Quit");
         verify(fakePrintStream, times(t)).print("Enter option number: ");
     }
-
 }

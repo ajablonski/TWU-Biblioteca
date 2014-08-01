@@ -29,4 +29,18 @@ public class Library {
             out.println(books.get(i-1).getDetails());
         }
     }
+
+    public List<Book> getBooks() {
+        return books;
+    }
+
+    public void checkOut(String s) {
+        try {
+            int bookToRemoveIndex = Integer.parseInt(s) - 1;
+            books.remove(bookToRemoveIndex);
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            out.println("Couldn't find the requested book");
+            ex.printStackTrace();
+        }
+    }
 }
