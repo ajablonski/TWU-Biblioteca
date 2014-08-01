@@ -18,6 +18,10 @@ public class Menu {
     }
 
     public void choose(String choice) {
-        menuOptions.get(choice).execute();
+        if(menuOptions.containsKey(choice)) {
+            menuOptions.get(choice).execute();
+        } else {
+            out.println("Select a valid option!");
+        }
     }
 }
