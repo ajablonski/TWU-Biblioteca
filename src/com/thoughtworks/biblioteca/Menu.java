@@ -24,4 +24,10 @@ public class Menu {
             out.println("Select a valid option!");
         }
     }
+
+    public void display() {
+        for (Map.Entry<String, MenuOption> keyValuePair : menuOptions.entrySet()) {
+            out.println(keyValuePair.getKey() + ". " + keyValuePair.getValue().getName());
+        }
+    }
 }

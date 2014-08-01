@@ -28,4 +28,8 @@ public class CheckoutBookOption implements MenuOption {
             e.printStackTrace();
         }
     }
+
+    public String getName() {
+        return "Check Out";
+    }
 }

@@ -12,4 +12,8 @@ public class ListBookOption implements MenuOption {
     public void execute() {
         library.displayBooks();
     }
+
+    public String getName() {
+        return "List Book";
+    }
 }

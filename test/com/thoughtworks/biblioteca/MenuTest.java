@@ -7,6 +7,7 @@ import java.io.PrintStream;
 
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 public class MenuTest {
     private PrintStream fakePrintStream;
@@ -30,5 +31,15 @@ public class MenuTest {
         Menu menu = new Menu(fakePrintStream);
         menu.choose("1");
         verify(fakePrintStream).println("Select a valid option!");
+    }
+
+    @Test
+    public void shouldDisplay(){
+        Menu menu = new Menu(fakePrintStream);
+        MenuOption fakeMenuOption = mock(MenuOption.class);
+        menu.addOption("1", fakeMenuOption);
+        when(fakeMenuOption.getName()).thenReturn("Option 1");
+        menu.display();
+        verify(fakePrintStream).println("1. Option 1");
     }
 }

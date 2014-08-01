@@ -37,12 +37,6 @@ public class ApplicationTest {
     }
 
     @Test
-    public void shouldDisplayMenuWhenStarting(){
-        application.start();
-        verifyMenuDisplayedTimes(2);
-    }
-
-    @Test
     public void shouldGetUserInput(){
         assertThat(application.getInput(), is("1"));
     }
@@ -51,7 +45,6 @@ public class ApplicationTest {
     public void shouldLoopUntilQuit() {
         Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("1\n1\nQ")), fakeMenu);
         app.start();
-        verifyMenuDisplayedTimes(3);
         verify(fakeMenu, times(2)).choose("1");
     }
 
@@ -60,12 +53,5 @@ public class ApplicationTest {
         Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("1\nQ")), fakeMenu);
         app.start();
         verify(fakeMenu).choose("1");
-    }
-
-    private void verifyMenuDisplayedTimes(int t) {
-        verify(fakePrintStream, times(t)).println("1. List books");
-        verify(fakePrintStream, times(t)).println("2. Checkout book");
-        verify(fakePrintStream, times(t)).println("Q. Quit");
-        verify(fakePrintStream, times(t)).print("Enter option number: ");
     }
 }

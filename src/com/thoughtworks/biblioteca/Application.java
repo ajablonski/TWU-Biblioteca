@@ -22,21 +22,18 @@ public class Application {
     public void start() {
 
         library.welcome();
-        displayMenu();
+        menu.display();
+        out.println("Q. Quit");
+        out.print("Enter option number: ");
         String input = getInput();
 
         while (!input.equals("Q")) {
             menu.choose(input);
-            displayMenu();
+            menu.display();
+            out.println("Q. Quit");
+            out.print("Enter option number: ");
             input = getInput();
         }
-    }
-
-    public void displayMenu() {
-        out.println("1. List books");
-        out.println("2. Checkout book");
-        out.println("Q. Quit");
-        out.print("Enter option number: ");
     }
 
     public String getInput() {
