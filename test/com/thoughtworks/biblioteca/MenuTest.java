@@ -21,7 +21,7 @@ public class MenuTest {
     public void shouldCallOptionMethod() {
         Menu menu = new Menu(fakePrintStream);
         MenuOption fakeMenuOption = mock(MenuOption.class);
-        menu.addOption("1", fakeMenuOption);
+        menu.addOption(fakeMenuOption);
         menu.choose("1");
         verify(fakeMenuOption).execute();
     }
@@ -37,7 +37,7 @@ public class MenuTest {
     public void shouldDisplay(){
         Menu menu = new Menu(fakePrintStream);
         MenuOption fakeMenuOption = mock(MenuOption.class);
-        menu.addOption("1", fakeMenuOption);
+        menu.addOption(fakeMenuOption);
         when(fakeMenuOption.getName()).thenReturn("Option 1");
         menu.display();
         verify(fakePrintStream).println("1. Option 1");
