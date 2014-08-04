@@ -1,19 +1,30 @@
 package com.thoughtworks.biblioteca;
 
+import java.io.PrintStream;
+import java.util.List;
+
 public class ListBookOption implements MenuOption {
 
-    private Library library;
+    private List<Book> books;
+    private PrintStream out;
 
-    public ListBookOption(Library library) {
-        this.library = library;
+    public ListBookOption(List<Book> books, PrintStream out) {
+        this.books = books;
+        this.out = out;
     }
 
     @Override
     public void execute() {
-        library.displayBooks();
+       displayBooks();
     }
 
     public String getName() {
         return "List Book";
+    }
+
+    public void displayBooks() {
+        for (Book book : books) {
+            out.println(book.getDetails());
+        }
     }
 }

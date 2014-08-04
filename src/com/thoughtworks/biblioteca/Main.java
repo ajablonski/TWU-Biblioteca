@@ -11,9 +11,12 @@ public class Main {
     public static void main(String[] args) {
         Menu menu = new Menu(System.out);
         Library library = library();
-        menu.addOption("1", new ListBookOption(library));
+        List<Book> listOfBooks = new ArrayList<Book>();
+        listOfBooks.add(new Book("Book 1", "Author 1", "2001"));
+        listOfBooks.add(new Book("Book 2", "Author 2", "2002"));
+        menu.addOption("1", new ListBookOption(listOfBooks, System.out));
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        menu.addOption("2", new CheckoutBookOption(library, System.out, in));
+        menu.addOption("2", new CheckoutBookOption(listOfBooks, System.out, in));
 
         new Application(library(), System.out, in, menu).start();
     }
@@ -27,3 +30,16 @@ public class Main {
         return new Library(listOfBooks, System.out);
     }
 }
+
+/*
+public class Main() {
+    public static void main(String[] args) {
+    // create buffered reader
+    // create list of books
+    // create Library with books
+    // pass InputStream and PrintStream to menu
+    // add menu option1 to menu
+    // add menu option2 to menu
+    }
+}
+ */

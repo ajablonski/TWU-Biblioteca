@@ -20,8 +20,7 @@ public class Application {
     }
 
     public void start() {
-
-        library.welcome();
+        menu.welcome();
         menu.display();
         out.println("Q. Quit");
         out.print("Enter option number: ");

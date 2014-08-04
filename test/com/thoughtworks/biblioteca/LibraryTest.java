@@ -85,15 +85,4 @@ public class LibraryTest {
             verify(book).getDetails();
         }
     }
-
-    @Test
-    public void shouldCheckoutBook(){
-        List<Book> books = new ArrayList<Book>();
-        books.add(mock(Book.class));
-        books.add(mock(Book.class));
-        Library myLibrary = new Library(books, fakePrintStream);
-        myLibrary.checkOut("1");
-        assertThat(myLibrary.getBooks().size(), is(1));
-    }
-
 }

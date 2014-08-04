@@ -2,6 +2,7 @@ package com.thoughtworks.biblioteca;
 
 import java.io.PrintStream;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 public class Menu {
@@ -9,7 +10,7 @@ public class Menu {
     private PrintStream out;
 
     public Menu(PrintStream out) {
-        menuOptions = new HashMap<String, MenuOption>();
+        menuOptions = new LinkedHashMap<String, MenuOption>();
         this.out = out;
     }
 
@@ -29,5 +30,9 @@ public class Menu {
         for (Map.Entry<String, MenuOption> keyValuePair : menuOptions.entrySet()) {
             out.println(keyValuePair.getKey() + ". " + keyValuePair.getValue().getName());
         }
+    }
+
+    public void welcome() {
+        out.println("Welcome!");
     }
 }
