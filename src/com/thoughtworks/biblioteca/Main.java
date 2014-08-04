@@ -10,13 +10,13 @@ public class Main {
 
     public static void main(String[] args) {
         Menu menu = new Menu(System.out);
-        Library library = library();
         List<Book> listOfBooks = new ArrayList<Book>();
         listOfBooks.add(new Book("Book 1", "Author 1", "2001"));
         listOfBooks.add(new Book("Book 2", "Author 2", "2002"));
         menu.addOption("1", new ListBookOption(listOfBooks, System.out));
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         menu.addOption("2", new CheckoutBookOption(listOfBooks, System.out, in));
+        menu.addOption("3", new ReturnBookMenuOption(listOfBooks, in, System.out));
 
         new Application(library(), System.out, in, menu).start();
     }

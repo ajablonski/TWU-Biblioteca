@@ -3,6 +3,7 @@ package com.thoughtworks.biblioteca;
 import org.hamcrest.Matchers;
 import org.junit.Test;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 
 public class BookTest {
@@ -23,5 +24,26 @@ public class BookTest {
         assertThat(book.getDetails(), Matchers.containsString("This is a really really rea..."));
         assertThat(book.getDetails(), Matchers.containsString("Alex Jablonskiiiiiiiiiiiiii..."));
         assertThat(book.getDetails(), Matchers.containsString("2000"));
+    }
+
+    @Test
+    public void shouldSayIfCheckedOut() {
+        Book book = new Book("Book 1", "Author 1", "2001");
+        assertThat(book.isCheckedOut(), is(false));
+    }
+
+    @Test
+    public void shouldCheckOut() {
+        Book book = new Book("Book 1", "Author 1", "2001");
+        book.checkOut();
+        assertThat(book.isCheckedOut(), is(true));
+    }
+
+    @Test
+    public void shouldCheckIn() {
+        Book book = new Book("Book 1", "Author 1", "2001");
+        book.checkOut();
+        book.checkIn();
+        assertThat(book.isCheckedOut(), is(false));
     }
 }

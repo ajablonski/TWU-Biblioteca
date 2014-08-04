@@ -12,14 +12,13 @@ import static org.mockito.Mockito.verify;
 
 public class ListBookOptionTest {
 
-    private Library library;
     private ListBookOption listBookOption;
     private PrintStream out;
+    private List<Book> listOfBooks;
 
     @Before
     public void setUp() throws Exception {
-        library = mock(Library.class);
-        List<Book> listOfBooks = new ArrayList<Book>();
+        listOfBooks = new ArrayList<Book>();
         listOfBooks.add(mock(Book.class));
         listOfBooks.add(mock(Book.class));
         out = mock(PrintStream.class);
@@ -29,8 +28,9 @@ public class ListBookOptionTest {
     @Test
     public void shouldListBooksOnExecute() {
         listBookOption.execute();
-
-        verify(library).displayBooks();
+        for (Book book: listOfBooks) {
+            verify(book).getDetails();
+        }
     }
 
 }

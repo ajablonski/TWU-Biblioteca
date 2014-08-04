@@ -32,22 +32,24 @@ public class CheckoutBookOption implements MenuOption {
     }
 
     @Override
-    public void execute() {
+    public void execute() throws IndexOutOfBoundsException{
         String selection = getSelection();
-        try {
-            int bookToRemoveIndex = Integer.parseInt(selection) - 1;
-            books.remove(bookToRemoveIndex);
+        int choice = Integer.parseInt(selection) - 1;
+        if (choice < books.size() &&
+            !books.get(choice).isCheckedOut()) {
+            books.get(choice).checkOut();
             out.println("Thank you! Enjoy your book.");
-        } catch (IndexOutOfBoundsException ex) {
+        } else {
             out.println("That book is not available");
-            ex.printStackTrace();
         }
     }
 
     public void displayBooksWithNumbers() {
         for (int i=1; i<=books.size(); i++) {
-            out.print(i + ". ");
-            out.println(books.get(i-1).getDetails());
+            if (!books.get(i-1).isCheckedOut()) {
+                out.print(i + ". ");
+                out.println(books.get(i-1).getDetails());
+            }
         }
     }
 

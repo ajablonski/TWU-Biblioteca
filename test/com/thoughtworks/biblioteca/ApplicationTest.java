@@ -33,7 +33,7 @@ public class ApplicationTest {
     @Test
     public void shouldWelcomeUserWhenStarting(){
         application.start();
-        verify(library).welcome();
+        verify(fakeMenu).welcome();
     }
 
     @Test

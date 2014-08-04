@@ -4,14 +4,12 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.BufferedReader;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.hamcrest.core.Is.is;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-import static org.mockito.Mockito.when;
+import static org.mockito.Mockito.*;
 
 public class CheckoutBookOptionTest {
 
@@ -25,24 +23,11 @@ public class CheckoutBookOptionTest {
         library = mock(Library.class);
         fakePrintStream = mock(PrintStream.class);
         fakeBufferedReader = mock(BufferedReader.class);
-        Book book = new Book("Title1",
-                "Author1",
-                "2001");
-        Book book2 = new Book("Title2",
-                "Author2",
-                "2002");
-        List<Book> books = new ArrayList<Book>();
-        books.add(book);
-        books.add(book2);
+        books = new ArrayList<Book>();
+        books.add(mock(Book.class));
+        books.add(mock(Book.class));
         checkoutBookOption = new CheckoutBookOption(books, fakePrintStream, fakeBufferedReader);
     }
-
-    /*@Before
-    public void shouldPrintChooseABookOnExecute(){
-        checkoutBookOption.execute();
-
-        verify(fakePrintStream).print("Choose a book: ");
-    }*/
 
     @Test
     public void shouldCheckoutBookOnExecute() throws Exception {
@@ -56,27 +41,37 @@ public class CheckoutBookOptionTest {
     @Test
     public void shouldDisplayMessageWhenAttemptToCheckoutCheckedoutBook() throws Exception {
         when(fakeBufferedReader.readLine()).thenReturn("3");
-        Book book = new Book("Title1",
-                "Author1",
-                "2001");
-        Book book2 = new Book("Title2",
-                "Author2",
-                "2002");
-        List<Book> books = new ArrayList<Book>();
-        books.add(book);
-        books.add(book2);
-        when(library.getBooks()).thenReturn(books);
+
         checkoutBookOption.execute();
         verify(fakePrintStream).println("That book is not available");
     }
 
-//    @Test
-//    public void shouldCheckoutBook(){
-//        List<Book> books = new ArrayList<Book>();
-//        books.add(mock(Book.class));
-//        books.add(mock(Book.class));
-//        Library myLibrary = new Library(books, fakePrintStream);
-//        myLibrary.execute("1");
-//        assertThat(myLibrary.getBooks().size(), is(1));
-//    }
+    @Test
+    public void shouldCheckoutBookOnCheckout() throws IOException {
+        when(fakeBufferedReader.readLine()).thenReturn("3");
+        Book book = mock(Book.class);
+        when(book.isCheckedOut()).thenReturn(false);
+        books.add(book);
+        checkoutBookOption.execute();
+        verify(book).checkOut();
+    }
+
+    @Test
+    public void shouldNotCheckoutCheckedOutBook() throws IOException {
+        when(fakeBufferedReader.readLine()).thenReturn("3");
+        Book book = mock(Book.class);
+        when(book.isCheckedOut()).thenReturn(true);
+        books.add(book);
+        checkoutBookOption.execute();
+        verify(book, never()).checkOut();
+    }
+
+    @Test
+    public void shouldOnlyDisplayAvailableBooks() {
+        when(books.get(0).isCheckedOut()).thenReturn(false);
+        when(books.get(1).isCheckedOut()).thenReturn(true);
+        checkoutBookOption.displayBooksWithNumbers();
+        verify(books.get(0)).getDetails();
+        verify(books.get(1), never()).getDetails();
+    }
 }
