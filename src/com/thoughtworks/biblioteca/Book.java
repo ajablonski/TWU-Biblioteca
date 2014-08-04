@@ -1,10 +1,9 @@
 package com.thoughtworks.biblioteca;
 
-public class Book {
+public class Book extends Media {
     private String title;
     private String author;
     private String publishDate;
-    private boolean isCheckedOut = false;
 
     public Book(String title, String author, String publishDate) {
         this.title = title;
@@ -24,18 +23,5 @@ public class Book {
         } else {
             return text;
         }
-    }
-
-    public Boolean isCheckedOut() {
-        return isCheckedOut;
-    }
-
-
-    public void checkOut() {
-        isCheckedOut = true;
-    }
-
-    public void checkIn() {
-        isCheckedOut = false;
     }
 }

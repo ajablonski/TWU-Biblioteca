@@ -1,16 +1,12 @@
 package com.thoughtworks.biblioteca;
 
-public class Movie {
-
-
+public class Movie extends Media {
     private final String name;
     private final String year;
     private final String director;
     private final int rating;
-    private Boolean isCheckedOut = false;
 
     public Movie(String name, String year, String director, int rating) {
-
         this.name = name;
         this.year = year;
         this.director = director;
@@ -37,17 +33,5 @@ public class Movie {
         } else {
             return text;
         }
-    }
-
-    public Boolean isCheckedOut() {
-        return isCheckedOut;
-    }
-
-    public void checkOut() {
-        isCheckedOut = true;
-    }
-
-    public void checkIn() {
-        isCheckedOut = false;
     }
 }
