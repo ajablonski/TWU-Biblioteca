@@ -13,10 +13,14 @@ public class Main {
         List<Book> listOfBooks = new ArrayList<Book>();
         listOfBooks.add(new Book("Book 1", "Author 1", "2001"));
         listOfBooks.add(new Book("Book 2", "Author 2", "2002"));
+        List<Movie> listOfMovies = new ArrayList<Movie>();
+        listOfMovies.add(new Movie("Movie 1", "2011", "Director 1", 10));
+        listOfMovies.add(new Movie("Movie 2", "2012", "Director 2", 0));
         menu.addOption("1", new ListBookOption(listOfBooks, System.out));
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         menu.addOption("2", new CheckoutBookOption(listOfBooks, System.out, in));
         menu.addOption("3", new ReturnBookMenuOption(listOfBooks, in, System.out));
+        menu.addOption("4", new ListMovieMenuOption(listOfMovies, System.out));
 
         new Application(library(), System.out, in, menu).start();
     }
