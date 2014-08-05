@@ -9,21 +9,23 @@ import java.util.List;
 public class Main {
 
     public static void main(String[] args) {
-        Menu menu = new Menu(System.out);
+        List<User> listOfUsers = new ArrayList<User>();
+        listOfUsers.add(new User("111-1111", "password"));
+        Session session = new Session(listOfUsers);
+        Menu menu = new Menu(System.out, session);
         List<Book> listOfBooks = new ArrayList<Book>();
         listOfBooks.add(new Book("Book 1", "Author 1", "2001"));
         listOfBooks.add(new Book("Book 2", "Author 2", "2002"));
         List<Movie> listOfMovies = new ArrayList<Movie>();
         listOfMovies.add(new Movie("Movie 1", "2011", "Director 1", 10));
         listOfMovies.add(new Movie("Movie 2", "2012", "Director 2", 0));
-        List<User> listOfUsers = new ArrayList<User>();
-        listOfUsers.add(new User("111-1111", "password"));
         menu.addOption(new ListBookOption(listOfBooks, System.out));
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         menu.addOption(new CheckoutBookOption(listOfBooks, System.out, in));
         menu.addOption(new ReturnBookMenuOption(listOfBooks, in, System.out));
         menu.addOption(new ListMovieMenuOption(listOfMovies, System.out));
-        menu.addOption(new LoginMenuOption(System.out, in, new Session(listOfUsers)));
+        menu.addOption(new CheckoutMovieMenuOption(listOfMovies, System.out, in));
+        menu.addOption(new LoginMenuOption(System.out, in, session));
 
         new Application(library(), System.out, in, menu).start();
     }

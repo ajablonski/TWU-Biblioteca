@@ -47,4 +47,9 @@ public class LoginMenuOption implements MenuOption {
     public boolean needsLogin() {
         return false;
     }
+
+    @Override
+    public boolean displayIfLoggedIn() {
+        return false;
+    }
 }

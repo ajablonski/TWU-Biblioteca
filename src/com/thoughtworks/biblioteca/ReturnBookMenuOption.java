@@ -59,4 +59,9 @@ public class ReturnBookMenuOption implements MenuOption{
     public boolean needsLogin() {
         return true;
     }
+
+    @Override
+    public boolean displayIfLoggedIn() {
+        return true;
+    }
 }

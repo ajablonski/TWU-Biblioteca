@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.io.PrintStream;
 import java.util.*;
 
+import static junit.framework.Assert.assertTrue;
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -40,5 +41,10 @@ public class ListMovieMenuOptionTest {
     @Test
     public void shouldNotRequireLogin() {
         assertFalse(listMovieMenuOption.needsLogin());
+    }
+
+    @Test
+    public void shouldDisplayIfLoggedIn() {
+        assertTrue(listMovieMenuOption.displayIfLoggedIn());
     }
 }

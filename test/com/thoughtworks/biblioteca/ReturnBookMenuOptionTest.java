@@ -82,4 +82,9 @@ public class ReturnBookMenuOptionTest  {
     public void shouldRequireUserLogin() {
         assertTrue(returnOption.needsLogin());
     }
+
+    @Test
+    public void shouldDisplayIfLoggedIn() {
+        assertTrue(returnOption.displayIfLoggedIn());
+    }
 }

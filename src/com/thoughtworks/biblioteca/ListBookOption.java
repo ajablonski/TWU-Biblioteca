@@ -19,7 +19,7 @@ public class ListBookOption implements MenuOption {
     }
 
     public String getName() {
-        return "List Book";
+        return "List books";
     }
 
     public void displayBooks() {
@@ -30,5 +30,9 @@ public class ListBookOption implements MenuOption {
 
     public boolean needsLogin() {
         return false;
+    }
+
+    public boolean displayIfLoggedIn() {
+        return true;
     }
 }

@@ -53,10 +53,15 @@ public class CheckoutBookOption implements MenuOption {
     }
 
     public String getName() {
-        return "Check Out";
+        return "Check out book";
     }
 
     public boolean needsLogin() {
+        return true;
+    }
+
+    @Override
+    public boolean displayIfLoggedIn() {
         return true;
     }
 }

@@ -4,12 +4,14 @@ import java.io.PrintStream;
 import java.util.*;
 
 public class Menu {
+    private Session session;
     private List<MenuOption> menuOptions;
     private PrintStream out;
 
-    public Menu(PrintStream out) {
+    public Menu(PrintStream out, Session session) {
         menuOptions = new ArrayList<MenuOption>();
         this.out = out;
+        this.session = session;
     }
 
     public void addOption(MenuOption menuOption) {
@@ -27,7 +29,11 @@ public class Menu {
 
     public void display() {
         for (MenuOption menuOption : menuOptions){
-            out.println((menuOptions.indexOf(menuOption) + 1) + ". " + menuOption.getName());
+            if ((session.userLoggedIn() && menuOption.displayIfLoggedIn())
+                    || (!session.userLoggedIn() && !menuOption.needsLogin())) {
+                out.println((menuOptions.indexOf(menuOption) + 1) + ". " + menuOption.getName());
+            }
+
         }
     }
 

@@ -27,4 +27,9 @@ public class ListMovieMenuOption implements MenuOption{
     public boolean needsLogin() {
         return false;
     }
+
+    @Override
+    public boolean displayIfLoggedIn() {
+        return true;
+    }
 }

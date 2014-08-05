@@ -72,4 +72,9 @@ public class LoginMenuOptionTest {
         assertFalse(option.needsLogin());
     }
 
+    @Test
+    public void shouldDisplayIfLoggedIn() {
+        assertFalse(option.displayIfLoggedIn());
+    }
+
 }

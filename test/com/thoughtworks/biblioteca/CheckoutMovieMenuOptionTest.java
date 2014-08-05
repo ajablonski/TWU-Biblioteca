@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class CheckoutMovieMenuOptionTest {
@@ -66,9 +68,20 @@ public class CheckoutMovieMenuOptionTest {
     public void shouldDisplayMovieListOnExecute() throws IOException {
         when(in.readLine()).thenReturn("1");
         when(movies.get(0).getDetails()).thenReturn("TestDetails");
+        when(movies.get(0).isCheckedOut()).thenReturn(false);
         option.displayMoviesWithNumbers();
 
         verify(out).println("1. TestDetails");
+    }
+
+    @Test
+    public void shouldNotDisplayCheckedOutMovies() throws IOException {
+        when(in.readLine()).thenReturn("1");
+        when(movies.get(0).getDetails()).thenReturn("TestDetails");
+        when(movies.get(0).isCheckedOut()).thenReturn(true);
+        option.displayMoviesWithNumbers();
+
+        verify(out, never()).println("1. TestDetails");
     }
 
     @Test
@@ -82,5 +95,15 @@ public class CheckoutMovieMenuOptionTest {
     @Test
     public void shouldRequireUserLogin() {
         assertTrue(option.needsLogin());
+    }
+
+    @Test
+    public void shouldDisplayIfLoggedIn() {
+        assertTrue(option.displayIfLoggedIn());
+    }
+
+    @Test
+    public void shouldGetName() {
+        assertThat(option.getName(), is("Check out movie"));
     }
 }

@@ -31,7 +31,9 @@ public class CheckoutMovieMenuOption implements MenuOption {
 
     public void displayMoviesWithNumbers() {
         for (Movie movie : movies){
-            out.println((movies.indexOf(movie) + 1) + ". " + movie.getDetails());
+            if (!movie.isCheckedOut()) {
+                out.println((movies.indexOf(movie) + 1) + ". " + movie.getDetails());
+            }
         }
     }
 
@@ -52,10 +54,15 @@ public class CheckoutMovieMenuOption implements MenuOption {
 
     @Override
     public String getName() {
-        return null;
+        return "Check out movie";
     }
 
     public boolean needsLogin() {
+        return true;
+    }
+
+    @Override
+    public boolean displayIfLoggedIn() {
         return true;
     }
 }

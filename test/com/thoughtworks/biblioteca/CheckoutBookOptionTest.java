@@ -10,6 +10,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static junit.framework.Assert.assertTrue;
+import static org.hamcrest.core.Is.is;
+import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
 
 public class CheckoutBookOptionTest {
@@ -86,5 +88,15 @@ public class CheckoutBookOptionTest {
     @Test
     public void shouldRequireUserLogin() {
         assertTrue(checkoutBookOption.needsLogin());
+    }
+
+    @Test
+    public void shouldDisplayIfLoggedIn() {
+        assertTrue(checkoutBookOption.displayIfLoggedIn());
+    }
+
+    @Test
+    public void shouldGetName() {
+        assertThat(checkoutBookOption.getName(), is("Check out book"));
     }
 }
