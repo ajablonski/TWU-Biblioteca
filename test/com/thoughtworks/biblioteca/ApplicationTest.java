@@ -15,7 +15,6 @@ import static org.mockito.Mockito.verify;
 
 public class ApplicationTest {
 
-    private Library library;
     private Application application;
     private PrintStream fakePrintStream;
     private BufferedReader fakeInputStream;
@@ -23,11 +22,10 @@ public class ApplicationTest {
 
     @Before
     public void setUp() throws Exception {
-        library = mock(Library.class);
         fakePrintStream = mock(PrintStream.class);
         fakeInputStream = new BufferedReader(new StringReader("1\nQ"));
         fakeMenu = mock(Menu.class);
-        application = new Application(library, fakePrintStream, fakeInputStream, fakeMenu);
+        application = new Application(fakePrintStream, fakeInputStream, fakeMenu);
     }
 
     @Test
@@ -43,14 +41,14 @@ public class ApplicationTest {
 
     @Test
     public void shouldLoopUntilQuit() {
-        Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("1\n1\nQ")), fakeMenu);
+        Application app = new Application(fakePrintStream, new BufferedReader(new StringReader("1\n1\nQ")), fakeMenu);
         app.start();
         verify(fakeMenu, times(2)).choose("1");
     }
 
     @Test
     public void shouldChooseAppropriateMenuOption() {
-        Application app = new Application(library, fakePrintStream, new BufferedReader(new StringReader("1\nQ")), fakeMenu);
+        Application app = new Application(fakePrintStream, new BufferedReader(new StringReader("1\nQ")), fakeMenu);
         app.start();
         verify(fakeMenu).choose("1");
     }

@@ -98,4 +98,16 @@ public class MenuTest {
         verify(fakePrintStream, never()).println("1. Test");
 
     }
+
+    @Test
+    public void shouldNotAllowSelectionOfUndisplayedMenuItem() {
+        Menu menu = new Menu(fakePrintStream, fakeSession);
+        MenuOption mockOption = mock(MenuOption.class);
+        menu.addOption(mockOption);
+        when(fakeSession.userLoggedIn()).thenReturn(false);
+        when(mockOption.needsLogin()).thenReturn(true);
+
+        menu.choose("1");
+        verify(mockOption, never()).execute();
+    }
 }

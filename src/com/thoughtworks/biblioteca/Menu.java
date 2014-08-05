@@ -20,8 +20,8 @@ public class Menu {
 
     public void choose(String choice) {
         int index = Integer.parseInt(choice);
-        if(index <= menuOptions.size()) {
-            menuOptions.get(index - 1).execute();
+        if(index <= menuOptions.size() && validMenuOption(menuOptions.get(index - 1))) {
+            menuOptions.get(index -1).execute();
         } else {
             out.println("Select a valid option!");
         }
@@ -29,12 +29,16 @@ public class Menu {
 
     public void display() {
         for (MenuOption menuOption : menuOptions){
-            if ((session.userLoggedIn() && menuOption.displayIfLoggedIn())
-                    || (!session.userLoggedIn() && !menuOption.needsLogin())) {
+            if (validMenuOption(menuOption)) {
                 out.println((menuOptions.indexOf(menuOption) + 1) + ". " + menuOption.getName());
             }
 
         }
+    }
+
+    private boolean validMenuOption(MenuOption menuOption) {
+        return (session.userLoggedIn() && menuOption.displayIfLoggedIn())
+                || (!session.userLoggedIn() && !menuOption.needsLogin());
     }
 
     public void welcome() {

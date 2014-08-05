@@ -7,13 +7,11 @@ import java.io.PrintStream;
 public class Application {
 
     private Menu menu;
-    private Library library;
     private PrintStream out;
     private BufferedReader in;
 
 
-    public Application(Library library, PrintStream out, BufferedReader in, Menu menu) {
-        this.library = library;
+    public Application(PrintStream out, BufferedReader in, Menu menu) {
         this.out = out;
         this.in = in;
         this.menu = menu;
