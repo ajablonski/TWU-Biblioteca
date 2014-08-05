@@ -23,4 +23,8 @@ public class ListMovieMenuOption implements MenuOption{
     public String getName() {
         return "List Movies";
     }
+
+    public boolean needsLogin() {
+        return false;
+    }
 }

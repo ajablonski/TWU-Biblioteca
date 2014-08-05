@@ -36,4 +36,9 @@ public class ListMovieMenuOptionTest {
     public void shouldReturnOptionName() {
         assertEquals(listMovieMenuOption.getName(), "List Movies");
     }
+
+    @Test
+    public void shouldNotRequireLogin() {
+        assertFalse(listMovieMenuOption.needsLogin());
+    }
 }

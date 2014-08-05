@@ -54,4 +54,8 @@ public class CheckoutMovieMenuOption implements MenuOption {
     public String getName() {
         return null;
     }
+
+    public boolean needsLogin() {
+        return true;
+    }
 }

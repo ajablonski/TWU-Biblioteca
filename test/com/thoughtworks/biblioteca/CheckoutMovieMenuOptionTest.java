@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class CheckoutMovieMenuOptionTest {
@@ -76,5 +77,10 @@ public class CheckoutMovieMenuOptionTest {
         option.execute();
 
         verify(out).print("Choose a movie: ");
+    }
+
+    @Test
+    public void shouldRequireUserLogin() {
+        assertTrue(option.needsLogin());
     }
 }

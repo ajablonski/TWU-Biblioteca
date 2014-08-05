@@ -27,4 +27,8 @@ public class ListBookOption implements MenuOption {
             out.println(book.getDetails());
         }
     }
+
+    public boolean needsLogin() {
+        return false;
+    }
 }

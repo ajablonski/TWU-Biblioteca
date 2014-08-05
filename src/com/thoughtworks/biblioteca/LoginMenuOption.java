@@ -22,7 +22,7 @@ public class LoginMenuOption implements MenuOption {
 
     @Override
     public String getName() {
-        return null;
+        return "Log in";
     }
 
     public String getLibraryNumber() {
@@ -42,5 +42,9 @@ public class LoginMenuOption implements MenuOption {
             ex.printStackTrace();
         }
         return response;
+    }
+
+    public boolean needsLogin() {
+        return false;
     }
 }

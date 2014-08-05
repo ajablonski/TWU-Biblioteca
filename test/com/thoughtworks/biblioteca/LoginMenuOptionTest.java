@@ -62,5 +62,14 @@ public class LoginMenuOptionTest {
         verify(fakeSession).attemptLogin("111", "password");
     }
 
+    @Test
+    public void shouldGetName() {
+        assertEquals("Log in", option.getName());
+    }
+
+    @Test
+    public void shouldNotRequireUserLogin() {
+        assertFalse(option.needsLogin());
+    }
 
 }

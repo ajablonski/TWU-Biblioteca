@@ -55,4 +55,8 @@ public class CheckoutBookOption implements MenuOption {
     public String getName() {
         return "Check Out";
     }
+
+    public boolean needsLogin() {
+        return true;
+    }
 }

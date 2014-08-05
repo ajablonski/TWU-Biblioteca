@@ -7,6 +7,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertFalse;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -31,6 +32,11 @@ public class ListBookOptionTest {
         for (Book book: listOfBooks) {
             verify(book).getDetails();
         }
+    }
+
+    @Test
+    public void shouldNotNeedLogin() {
+        assertFalse(listBookOption.needsLogin());
     }
 
 }

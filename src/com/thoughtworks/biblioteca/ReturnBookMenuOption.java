@@ -55,4 +55,8 @@ public class ReturnBookMenuOption implements MenuOption{
     public String getName() {
         return "Return book";
     }
+
+    public boolean needsLogin() {
+        return true;
+    }
 }

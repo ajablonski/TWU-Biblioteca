@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertTrue;
 import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.assertThat;
 import static org.mockito.Mockito.*;
@@ -75,5 +76,10 @@ public class ReturnBookMenuOptionTest  {
         returnOption.execute();
         verify(fakePrintStream).println("That is not a valid book to return.");
 
+    }
+
+    @Test
+    public void shouldRequireUserLogin() {
+        assertTrue(returnOption.needsLogin());
     }
 }

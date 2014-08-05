@@ -9,6 +9,7 @@ import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import static junit.framework.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class CheckoutBookOptionTest {
@@ -80,5 +81,10 @@ public class CheckoutBookOptionTest {
         when(books.get(1).isCheckedOut()).thenReturn(true);
         checkoutBookOption.displayBooksWithNumbers();
         verify(books.get(1), never()).getDetails();
+    }
+
+    @Test
+    public void shouldRequireUserLogin() {
+        assertTrue(checkoutBookOption.needsLogin());
     }
 }

@@ -16,11 +16,14 @@ public class Main {
         List<Movie> listOfMovies = new ArrayList<Movie>();
         listOfMovies.add(new Movie("Movie 1", "2011", "Director 1", 10));
         listOfMovies.add(new Movie("Movie 2", "2012", "Director 2", 0));
+        List<User> listOfUsers = new ArrayList<User>();
+        listOfUsers.add(new User("111-1111", "password"));
         menu.addOption(new ListBookOption(listOfBooks, System.out));
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
         menu.addOption(new CheckoutBookOption(listOfBooks, System.out, in));
         menu.addOption(new ReturnBookMenuOption(listOfBooks, in, System.out));
         menu.addOption(new ListMovieMenuOption(listOfMovies, System.out));
+        menu.addOption(new LoginMenuOption(System.out, in, new Session(listOfUsers)));
 
         new Application(library(), System.out, in, menu).start();
     }
