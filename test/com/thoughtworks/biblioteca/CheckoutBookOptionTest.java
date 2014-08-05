@@ -13,14 +13,13 @@ import static org.mockito.Mockito.*;
 
 public class CheckoutBookOptionTest {
 
-    private Library library;
     private CheckoutBookOption checkoutBookOption;
     private PrintStream fakePrintStream;
     private BufferedReader fakeBufferedReader;
     private List<Book> books;
+
     @Before
     public void setUp() throws Exception {
-        library = mock(Library.class);
         fakePrintStream = mock(PrintStream.class);
         fakeBufferedReader = mock(BufferedReader.class);
         books = new ArrayList<Book>();
@@ -30,11 +29,10 @@ public class CheckoutBookOptionTest {
     }
 
     @Test
-    public void shouldCheckoutBookOnExecute() throws Exception {
+    public void shouldDisplayMessageOnSuccessfulCheckout() throws Exception {
         when(fakeBufferedReader.readLine()).thenReturn("1");
-
-        when(library.getBooks()).thenReturn(books);
         checkoutBookOption.execute();
+
         verify(fakePrintStream).println("Thank you! Enjoy your book.");
     }
 
@@ -43,6 +41,7 @@ public class CheckoutBookOptionTest {
         when(fakeBufferedReader.readLine()).thenReturn("3");
 
         checkoutBookOption.execute();
+
         verify(fakePrintStream).println("That book is not available");
     }
 
@@ -69,9 +68,17 @@ public class CheckoutBookOptionTest {
     @Test
     public void shouldOnlyDisplayAvailableBooks() {
         when(books.get(0).isCheckedOut()).thenReturn(false);
+        when(books.get(0).getDetails()).thenReturn("test details");
         when(books.get(1).isCheckedOut()).thenReturn(true);
         checkoutBookOption.displayBooksWithNumbers();
-        verify(books.get(0)).getDetails();
+        verify(fakePrintStream).println("1. test details");
+    }
+
+    @Test
+    public void shouldNotDisplayUnavailableBooks() {
+        when(books.get(0).isCheckedOut()).thenReturn(false);
+        when(books.get(1).isCheckedOut()).thenReturn(true);
+        checkoutBookOption.displayBooksWithNumbers();
         verify(books.get(1), never()).getDetails();
     }
 }

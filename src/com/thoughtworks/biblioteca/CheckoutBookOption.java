@@ -32,7 +32,7 @@ public class CheckoutBookOption implements MenuOption {
     }
 
     @Override
-    public void execute() throws IndexOutOfBoundsException{
+    public void execute() {
         String selection = getSelection();
         int choice = Integer.parseInt(selection) - 1;
         if (choice < books.size() &&
@@ -47,8 +47,7 @@ public class CheckoutBookOption implements MenuOption {
     public void displayBooksWithNumbers() {
         for (int i=1; i<=books.size(); i++) {
             if (!books.get(i-1).isCheckedOut()) {
-                out.print(i + ". ");
-                out.println(books.get(i-1).getDetails());
+                out.println(i + ". " + books.get(i-1).getDetails());
             }
         }
     }
@@ -56,15 +55,4 @@ public class CheckoutBookOption implements MenuOption {
     public String getName() {
         return "Check Out";
     }
-
-//    public void execute(String s, List<Book> books) {
-//        try {
-//            int bookToRemoveIndex = Integer.parseInt(s) - 1;
-//            books.remove(bookToRemoveIndex);
-//            out.println("Thank you! Enjoy your book.");
-//        } catch (IndexOutOfBoundsException ex) {
-//            out.println("That book is not available");
-//            ex.printStackTrace();
-//        }
-//    }
 }
