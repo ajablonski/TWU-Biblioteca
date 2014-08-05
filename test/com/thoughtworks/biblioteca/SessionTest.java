@@ -6,6 +6,7 @@ import org.junit.Test;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.hamcrest.core.Is.is;
 import static org.junit.Assert.*;
 import static org.mockito.Matchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -37,6 +38,18 @@ public class SessionTest {
         when(mockUser.hasPassword(anyString())).thenReturn(false);
         session.attemptLogin("111", "wrongPass");
         assertFalse(session.userLoggedIn());
+    }
+
+    @Test
+    public void shouldReturnLoggedInUser() {
+        when(mockUser.hasPassword(anyString())).thenReturn(true);
+        session.attemptLogin("111", "password");
+        assertThat(session.getUser(), is(mockUser));
+    }
+
+    @Test
+    public void shouldReturnNullWhenNoUserLoggedIn() {
+        assertNull(session.getUser());
     }
 
 }

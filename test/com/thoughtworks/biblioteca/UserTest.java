@@ -1,5 +1,6 @@
 package com.thoughtworks.biblioteca;
 
+import org.hamcrest.Matchers;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -11,7 +12,7 @@ public class UserTest {
 
     @Before
     public void setUp(){
-        user = new User("111", "password");
+        user = new User("111", "password", "User Name", "user@email.com", "555-5555");
     }
 
     @Test
@@ -27,6 +28,13 @@ public class UserTest {
     @Test
     public void shouldGetUserLibraryNumber() {
         assertEquals(user.getLibraryNumber(), "111");
+    }
+
+    @Test
+    public void shouldGetUserInformation() {
+        assertThat(user.getInfo(), Matchers.containsString("Name: User Name"));
+        assertThat(user.getInfo(), Matchers.containsString("Email: user@email.com"));
+        assertThat(user.getInfo(), Matchers.containsString("Phone: 555-5555"));
     }
 
 }

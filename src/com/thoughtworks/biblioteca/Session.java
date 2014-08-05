@@ -5,7 +5,7 @@ import java.util.List;
 public class Session {
 
     private List<User> userList;
-    private boolean loggedIn = false;
+    private User loggedInUser = null;
 
     public Session(List<User> userList){
         this.userList = userList;
@@ -15,12 +15,16 @@ public class Session {
         for (User user : userList) {
             if (user.getLibraryNumber().equals(libraryNumber)
                 && user.hasPassword(password)) {
-                loggedIn = true;
+                loggedInUser = user;
             }
         }
     }
 
     public boolean userLoggedIn() {
-        return loggedIn;
+        return loggedInUser != null;
+    }
+
+    public User getUser() {
+        return loggedInUser;
     }
 }

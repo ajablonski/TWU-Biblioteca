@@ -10,7 +10,7 @@ public class Main {
 
     public static void main(String[] args) {
         List<User> listOfUsers = new ArrayList<User>();
-        listOfUsers.add(new User("111-1111", "password"));
+        listOfUsers.add(new User("111-1111", "password", "User Name", "user@email.com", "555-5555"));
         Session session = new Session(listOfUsers);
         Menu menu = new Menu(System.out, session);
         List<Book> listOfBooks = new ArrayList<Book>();
@@ -26,6 +26,7 @@ public class Main {
         menu.addOption(new ListMovieMenuOption(listOfMovies, System.out));
         menu.addOption(new CheckoutMovieMenuOption(listOfMovies, System.out, in));
         menu.addOption(new LoginMenuOption(System.out, in, session));
+        menu.addOption(new UserInfoMenuOption(session, System.out));
 
         new Application(library(), System.out, in, menu).start();
     }
